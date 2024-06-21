@@ -65,6 +65,7 @@ options(warnings=-50)
 # Machine learning
 library(e1071)
 library(PreProcessing)
+library(nnet)
 # Partitionner les données
 df<-iris
 set.seed(123) # fixer la graine aléatoire
@@ -85,4 +86,21 @@ accuracy<-sum(diag(tab))/sum(tab)*100
 accuracy
 specificity<-100-accuracy
 specificity
+# regression logistique avec les fleurs d'iris
+glm=multinom(Species~.,data=train)
+# résumé du modéle
+summary(glm)
+# prediction du modéle
+pred<-predict(glm,test,type="class")
+pred[1:10]  # prédiction des 10 premiers fleurs
+# Confusion Matrix
+tab<-table(Predict=pred,Actual=test$Species)
+tab
+# calcul de l'accuracy
+accuracy<-sum(diag(tab))/sum(tab)*100
+accuracy
+# spécificité
+specificity<-100-accuracy
+specificity
+
 
