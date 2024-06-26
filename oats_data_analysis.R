@@ -27,8 +27,9 @@ p_2=ggplot(data,aes(x=nitrogene,y=yield,fill=variete))+
 p_2
 ggplotly(p)
 
-# analyse de la regression linéaire
-modele=lm(yield~nitrogene+variete,data=data)
+# analyse de la regression linéaire entre le rendement et 
+# variables explicatives (variete,nitogéne)
+modele=lm(yield~nitrogene+variete+block,data=data)
 modele
 summary(modele)
 # analyse de la variance
