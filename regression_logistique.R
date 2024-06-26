@@ -13,10 +13,12 @@ str(iris)
 # résumé des donnés
 summary(iris)
 # analyse univarié 
-plot(iris$Sepal.Length,iris$Sepal.Width,col='blue')
-# Analyse bivariée
+boxplot(iris$Sepal.Length,col='blue',ylab="Petal.length",
+        main="diagramme en boxplot")
 grid(col='green')
-# observer la correlation entre les valeur numériques
+
+# Analyse bivariée
+# observer la correlation entre les valeurs numériques
 cor_matrix <- cor(iris[, 1:4])
 
 # Print la correlation
@@ -28,17 +30,13 @@ corrplot(cor_matrix, method = "color", type = "upper",
          addCoef.col = "black", # Add correlation coefficients
          cl.pos = "b", # Position of the color legend
          number.cex = 0.7) # Size of the correlation coefficients
-
+# diagramme en boxplot entre espéces et sepal width
 ggplot(iris,aes(x=Species,y=Sepal.Width,color=Species ))+
     geom_boxplot()+
     theme_bw()+
     facet_wrap(~Species)+
     labs(title = "boxplot sepal.width")
-ggplot(iris,aes(x=Species,y=Petal.Width,colour='black' ))+
-    geom_boxplot()+
-    theme_bw()+
-    facet_wrap(~Species)+
-    labs(title = "boxplot Petal.width")
+# diagramme en boxplot entre espéces et sepal Pétal
 ggplot(iris,aes(x=Sepal.Width ,y=Sepal.Length),fill=Species)+
     geom_point(alpha=0.5,size=4)+
     theme_classic()+
@@ -98,7 +96,7 @@ tab<-table(Predict=pred,Actual=test$Species)
 tab
 # calcul de l'accuracy
 accuracy<-sum(diag(tab))/sum(tab)*100
-accuracy
+accuracy     # le modéle fait une prédiction correcte à 90%
 # spécificité
 specificity<-100-accuracy
 specificity
